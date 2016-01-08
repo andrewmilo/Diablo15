@@ -5,13 +5,13 @@
 
 class Entity {
 	
-	private:
+	protected:
 		std::string name;
 		unsigned int level;
 		int strength;
 		int dexterity;
 		int vitality;
-		int intelligence
+		int intelligence;
 		int positionX;
 		int positionY;
 		int orientation;

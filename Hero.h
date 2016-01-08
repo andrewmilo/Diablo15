@@ -6,7 +6,7 @@
 class Hero : public Entity {
 	
 	public:
-		Hero( void );
+		Hero( std::string );
 		~Hero( void );
 	private:
 		

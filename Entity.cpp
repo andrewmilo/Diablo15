@@ -7,12 +7,12 @@ Entity::Entity( std::string name ){
 
 Entity::~Entity( void ){ }
 
-Entity::attack( Entity& other ) const {
+void Entity::attack( Entity& other ) const {
 	
-	other.health -= this->strength;
+	//other.health -= this->strength;
 }
 
-Entity::move( const int steps, const char direction ){
+void Entity::move( const int steps, const char direction ){
 	
-	this->position += 
+	//this->position += 
 }

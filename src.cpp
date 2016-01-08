@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 #include "PlaneDND.h"
 
 int main(){
@@ -7,11 +7,42 @@ int main(){
 	// Create game
 	PlaneDND planeDND;
 	
-	std::cout << " Press Y to play." << std::endl;
-	char y;
-	cin >> y;
+	std::cout << " ** Welcome to Diablo 1.5. blizzardtm. **" << std::endl;
 	
-	if( y == 'y' ) 
-		planeDND.start();
+	std::cout << std::endl;
+	
+	std::cout << " ** Enter a hero name: ";
+	std::string name;
+	std::cin >> name;
+	
+	Hero hero( name ); // construct the hero
+	
+	std::cout << std::endl;
+	
+	std::cout << " ** Select a character. **" << std::endl;
+	std::cout << "    [1] Barbarian." << std::endl;
+	std::cout << "    [2] Sorceress." << std::endl;
+	std::cout << "    [3] Paladin." << std::endl;
+	std::cout << "    [4] Necromancer." << std::endl;
+	std::cout << "    [5] Amazon." << std::endl;
+	std::cout << "    [6] Druid." << std::endl;
+	std::cout << "    [7] Assassin." << std::endl;
+	
+	int choice;
+	
+	while( choice != 1 
+		&& choice != 2 
+		&& choice != 3
+		&& choice != 4 ){
+		
+		std::cin >> choice;
+	}
+	
+	std::cout << std::endl;
+	
+	std::cout << " Press Enter to start. " << std::endl;
+	std::cin.ignore();
+
+	planeDND.start();
 	
 }

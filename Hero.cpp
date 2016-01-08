@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero( void ){
+Hero::Hero( std::string name ) : Entity( name ){
 	
 	this->level = 1;
 	this->strength = 5;
@@ -8,3 +8,5 @@ Hero::Hero( void ){
 	this->intelligence = 5;
 	this->vitality = 5;
 }
+
+Hero::~Hero( void ){ }

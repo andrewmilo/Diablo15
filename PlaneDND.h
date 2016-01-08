@@ -6,7 +6,7 @@
 class PlaneDND {
 	
 	private:
-		Hero hero;
+		Hero* hero;
 	
 	public:
 		void start( void );
