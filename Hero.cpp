@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero( std::string name ) : Entity( name ){
+Hero::Hero( std::string name, HeroClass heroclass ) : Entity( name ){
 	
 	this->level = 1;
 	this->strength = 5;

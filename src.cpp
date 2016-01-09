@@ -39,21 +39,21 @@ int main(){
 	Hero::HeroClass heroClass;
 	
 	if( choice == 1 )
-		heroClass = Hero::HeroClass.BARBARIAN;
+		heroClass = Hero::BARBARIAN;
 	else if( choice == 2 )
-		heroClass = Hero::HeroClass.SORCERCESS;
+		heroClass = Hero::SORCERESS;
 	else if( choice == 3 )
-		heroClass = Hero::HeroClass.PALADIN;
+		heroClass = Hero::PALADIN;
 	else if( choice == 4 )
-		heroClass = Hero::HeroClass.NECROMANCER;
+		heroClass = Hero::NECROMANCER;
 	else if( choice == 5 )
-		heroClass = Hero::HeroClass.AMAZON;
+		heroClass = Hero::AMAZON;
 	else if( choice == 6 )
-		heroClass = Hero::HeroClass.DRUID;
+		heroClass = Hero::DRUID;
 	else if( choice == 7 )
-		heroClass = Hero::HeroClass.ASSASSIN;
+		heroClass = Hero::ASSASSIN;
 	
-	Hero hero( name ); // construct the hero
+	Hero hero( name, heroClass ); // construct the hero
 	
 	std::cout << std::endl;
 	
