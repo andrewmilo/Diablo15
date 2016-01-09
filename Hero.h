@@ -6,10 +6,22 @@
 class Hero : public Entity {
 	
 	public:
-		Hero( std::string );
+	
+		enum HeroClass {
+			BARBARIAN,
+			ASSASSIN,
+			PALADIN,
+			DRUID,
+			NECROMANCER,
+			SORCERESS,
+			AMAZON
+		};
+	
+		Hero( std::string, HeroClass );
 		~Hero( void );
 	private:
-		
+
+		HeroClass heroClass;
 };
 
 #endif

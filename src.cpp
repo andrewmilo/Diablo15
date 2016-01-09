@@ -15,8 +15,6 @@ int main(){
 	std::string name;
 	std::cin >> name;
 	
-	Hero hero( name ); // construct the hero
-	
 	std::cout << std::endl;
 	
 	std::cout << " ** Select a character. **" << std::endl;
@@ -37,6 +35,25 @@ int main(){
 		
 		std::cin >> choice;
 	}
+	
+	Hero::HeroClass heroClass;
+	
+	if( choice == 1 )
+		heroClass = Hero::HeroClass.BARBARIAN;
+	else if( choice == 2 )
+		heroClass = Hero::HeroClass.SORCERCESS;
+	else if( choice == 3 )
+		heroClass = Hero::HeroClass.PALADIN;
+	else if( choice == 4 )
+		heroClass = Hero::HeroClass.NECROMANCER;
+	else if( choice == 5 )
+		heroClass = Hero::HeroClass.AMAZON;
+	else if( choice == 6 )
+		heroClass = Hero::HeroClass.DRUID;
+	else if( choice == 7 )
+		heroClass = Hero::HeroClass.ASSASSIN;
+	
+	Hero hero( name ); // construct the hero
 	
 	std::cout << std::endl;
 	
