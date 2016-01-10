@@ -9,7 +9,10 @@ class PlaneDND {
 		Hero* hero;
 	
 	public:
-		void start( Hero* );
+		void start( void );
+		void get_hero( void );
+		void de_serialize( void );
+		void create_hero( void );
 		PlaneDND();
 		~PlaneDND();
 };
