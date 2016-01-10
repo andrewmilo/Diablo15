@@ -9,7 +9,7 @@ class PlaneDND {
 		Hero* hero;
 	
 	public:
-		void start( void );
+		void start( Hero* );
 		PlaneDND();
 		~PlaneDND();
 };

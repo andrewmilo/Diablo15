@@ -5,7 +5,11 @@ PlaneDND::PlaneDND( void ){ }
 
 PlaneDND::~PlaneDND( void ){ }
 
-void PlaneDND::start( void ){
+void PlaneDND::start( Hero* hero ){
+	
+	if( !hero )
+		this->hero = hero; // init hero
+	
 	
 	
 }

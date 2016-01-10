@@ -8,7 +8,7 @@ class Hero : public Entity {
 	public:
 	
 		enum HeroClass {
-			BARBARIAN,
+			BARBARIAN = 0,
 			ASSASSIN,
 			PALADIN,
 			DRUID,
