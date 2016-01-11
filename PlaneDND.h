@@ -15,10 +15,12 @@ class PlaneDND {
 		void get_hero( void );
 		void de_serialize( void );
 		void create_hero( void );
-		void save( void );
+		inline void save( void );
 		void loop( void );
-		void toggle_game_state( void );
-		void print_stats( void ) const;
+		inline void toggle_game_state( void );
+		inline void print_stats( void ) const;
+		inline void pause( void );
+		inline void resume( void );
 		PlaneDND();
 		~PlaneDND();
 };

@@ -13,25 +13,35 @@ void PlaneDND::start( void ){
 	
 	get_hero();
 	
-	
-	
 	loop(); // gameplay loop
 }
 
 void PlaneDND::loop( void ){
 	
-	while ( this->live ){
+	while ( true ){
 		
-		 std::string c;
-		 std::cin >> c;
-		 
-		 if( c == "save" || c == "s" ) { save(); }
-		 else if( c == "quit" || c == "q" ) { break; }
-		 else if( c == "stats" ){ print_stats(); }
+		std::string c;
+		std::cin >> c;
+		
+		if( this->live ){
+			
+			// gameplay physics/mechanics
+			
+		}
+		
+		if( c == "save" || c == "s" ) { save(); }
+		else if( c == "pause" ) pause();
+		else if( c == "resume" ) resume();
+		else if( c == "quit" || c == "q" ) { break; }
+		else if( c == "stats" ){ print_stats(); }
 	}
 }
 
-void PlaneDND::toggle_game_state( void ){ this->live = !this->live; }
+inline void PlaneDND::toggle_game_state( void ){ this->live = !this->live; }
+
+inline void PlaneDND::pause( void ){ this->live = false; }
+
+inline void PlaneDND::resume( void ){ this->live = true; }
 
 void PlaneDND::get_hero( void ){
 
@@ -41,7 +51,7 @@ void PlaneDND::get_hero( void ){
 	else create_hero();
 }
 
-void PlaneDND::print_stats( void ) const {
+inline void PlaneDND::print_stats( void ) const {
 	
 	std::cout 
 		<< std::endl
@@ -138,7 +148,7 @@ void PlaneDND::de_serialize( void ){
 	this->hero = new Hero( name, atoi( v[ 1 ].c_str() ), cl );
 }
 
-void PlaneDND::save( void ){
+inline void PlaneDND::save( void ){
 	
 	std::ofstream of( this->SAVE_PATH );
 	
