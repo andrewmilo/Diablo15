@@ -1,32 +1,42 @@
 #include "PlaneDND.h"
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <cstdlib>
+#include <sstream>
 
-PlaneDND::PlaneDND( void ){ }
+PlaneDND::PlaneDND( void ) : SAVE_PATH( "save.txt" ){ }
 
 PlaneDND::~PlaneDND( void ){ delete hero; }
 
 void PlaneDND::start( void ){
 	
 	get_hero();
+	
+	loop(); // gameplay loop
 }
 
-void PlaneDND::get_hero( void ){
+void PlaneDND::loop( void ){
 	
-	const char* save = "save.txt";
-	
-	// Try to De-serialize data
-	if( std::ifstream( save ) ){
+	while ( this->live ){
 		
-		de_serialize();
-	}else{
-		
-		create_hero();
+		 
 	}
+}
+
+void PlaneDND::toggle_game_state( void ){ this->live = !this->live; }
+
+void PlaneDND::get_hero( void ){
+
+	// Try to De-serialize data
+	if( std::ifstream( SAVE_PATH ) )
+		de_serialize();
+	else create_hero();
 }
 
 void PlaneDND::create_hero(){
 	
-	std::ofstream is( save );
+	std::ofstream is( SAVE_PATH );
 		
 	std::cout << " ** Enter a hero name: ";
 	std::string name;
@@ -75,7 +85,7 @@ void PlaneDND::create_hero(){
 
 void PlaneDND::de_serialize( void ){
 	
-	std::ifstream infile( save );
+	std::ifstream infile( SAVE_PATH );
 	unsigned int level;
 	std::vector< std::string > v;
 	
@@ -103,4 +113,14 @@ void PlaneDND::de_serialize( void ){
 	const unsigned int intelligence = atoi( v[ 5 ].c_str() );
 	
 	this->hero = new Hero( name, cl );
+}
+
+void PlaneDND::save( void ){
+	
+	std::ofstream of( this->SAVE_PATH );
+	
+	if( !this->hero ) return;
+	
+	of << this->hero->get_name();
+	   //<< this->player->get_hero_class();
 }

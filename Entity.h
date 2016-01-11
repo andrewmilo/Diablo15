@@ -21,7 +21,6 @@ class Entity {
 		~Entity( void );
 	
 		std::string get_name( void ) const;
-		
 		unsigned int get_level( void ) const;
 		int get_strength( void ) const;
 		int get_dexterity( void ) const;

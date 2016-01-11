@@ -16,12 +16,13 @@ class Hero : public Entity {
 			SORCERESS,
 			AMAZON
 		};
-	
+		
+		HeroClass get_hero_class( void ) const;
 		Hero( std::string, HeroClass );
 		~Hero( void );
 	private:
 
-		HeroClass heroClass;
+		HeroClass hero_class;
 };
 
 #endif

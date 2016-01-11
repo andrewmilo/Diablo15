@@ -10,3 +10,5 @@ Hero::Hero( std::string name, HeroClass heroclass ) : Entity( name ){
 }
 
 Hero::~Hero( void ){ }
+
+Hero::HeroClass Hero::get_hero_class( void ) const { return this->hero_class; }
