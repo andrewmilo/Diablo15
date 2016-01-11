@@ -8,7 +8,7 @@ class PlaneDND {
 	private:
 		Hero* hero;
 		const char* SAVE_PATH;
-		bool live;
+		volatile bool live;
 	
 	public:
 		void start( void );
@@ -18,6 +18,7 @@ class PlaneDND {
 		void save( void );
 		void loop( void );
 		void toggle_game_state( void );
+		void print_stats( void ) const;
 		PlaneDND();
 		~PlaneDND();
 };

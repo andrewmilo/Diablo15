@@ -13,6 +13,8 @@ void PlaneDND::start( void ){
 	
 	get_hero();
 	
+	
+	
 	loop(); // gameplay loop
 }
 
@@ -20,7 +22,12 @@ void PlaneDND::loop( void ){
 	
 	while ( this->live ){
 		
+		 std::string c;
+		 std::cin >> c;
 		 
+		 if( c == "save" || c == "s" ) { save(); }
+		 else if( c == "quit" || c == "q" ) { break; }
+		 else if( c == "stats" ){ print_stats(); }
 	}
 }
 
@@ -32,6 +39,22 @@ void PlaneDND::get_hero( void ){
 	if( std::ifstream( SAVE_PATH ) )
 		de_serialize();
 	else create_hero();
+}
+
+void PlaneDND::print_stats( void ) const {
+	
+	std::cout 
+		<< std::endl
+	    << this->hero->get_name()
+		<< std::endl
+		<< this->hero->get_strength()
+		<< std::endl
+		<< this->hero->get_dexterity()
+		<< std::endl
+		<< this->hero->get_vitality()
+		<< std::endl
+		<< this->hero->get_intelligence()
+		<< std::endl;
 }
 
 void PlaneDND::create_hero(){
@@ -80,7 +103,7 @@ void PlaneDND::create_hero(){
 	else if( choice == 7 )
 		heroClass = Hero::ASSASSIN;
 		
-	this->hero = new Hero( name, heroClass ); // construct the hero
+	this->hero = new Hero( name, choice, heroClass ); // construct the hero
 }
 
 void PlaneDND::de_serialize( void ){
@@ -109,10 +132,10 @@ void PlaneDND::de_serialize( void ){
 	// Load stats
 	const unsigned int strength = atoi( v[ 2 ].c_str() );
 	const unsigned int dexterity = atoi( v[ 3 ].c_str() );
-	const unsigned int stamina = atoi( v[ 4 ].c_str() );
+	const unsigned int vitality = atoi( v[ 4 ].c_str() );
 	const unsigned int intelligence = atoi( v[ 5 ].c_str() );
 	
-	this->hero = new Hero( name, cl );
+	this->hero = new Hero( name, atoi( v[ 1 ].c_str() ), cl );
 }
 
 void PlaneDND::save( void ){
@@ -121,6 +144,21 @@ void PlaneDND::save( void ){
 	
 	if( !this->hero ) return;
 	
-	of << this->hero->get_name();
-	   //<< this->player->get_hero_class();
+	of << this->hero->get_name()
+	   << std::endl
+	   << this->hero->hero_class_id
+	   << std::endl
+	   << this->hero->get_strength()
+	   << std::endl
+	   << this->hero->get_dexterity()
+	   << std::endl
+	   << this->hero->get_vitality()
+	   << std::endl
+	   << this->hero->get_intelligence();
+	   
+	std::cout << std::endl;   
+	std::cout << std::endl;
+	std::cout << " ** [GAME SAVED] **" << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

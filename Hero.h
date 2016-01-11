@@ -7,6 +7,7 @@ class Hero : public Entity {
 	
 	public:
 	
+		const int hero_class_id;
 		enum HeroClass {
 			BARBARIAN = 0,
 			ASSASSIN,
@@ -18,10 +19,10 @@ class Hero : public Entity {
 		};
 		
 		HeroClass get_hero_class( void ) const;
-		Hero( std::string, HeroClass );
+		Hero( const std::string, const int, HeroClass );
 		~Hero( void );
 	private:
-
+	
 		HeroClass hero_class;
 };
 
