@@ -11,6 +11,9 @@ PlaneDND::~PlaneDND( void ){ delete hero; }
 
 void PlaneDND::start( void ){
 	
+	print_message( " Press Enter to start. ", 2, 2 );
+	std::cin.ignore(); // Wait for Enter key
+	
 	get_hero();
 	
 	loop(); // gameplay loop
@@ -18,9 +21,11 @@ void PlaneDND::start( void ){
 
 void PlaneDND::loop( void ){
 	
+	std::string c;
+	
 	while ( true ){
 		
-		std::string c;
+		std::cout << "> ";
 		std::cin >> c;
 		
 		if( this->live ){
@@ -34,14 +39,49 @@ void PlaneDND::loop( void ){
 		else if( c == "resume" ) resume();
 		else if( c == "quit" || c == "q" ) { break; }
 		else if( c == "stats" ){ print_stats(); }
+		else if( c == "help" ){ print_help(); }
 	}
 }
 
 inline void PlaneDND::toggle_game_state( void ){ this->live = !this->live; }
 
-inline void PlaneDND::pause( void ){ this->live = false; }
+inline void PlaneDND::print_help( void ) const { 
+	
+	print_message( "Commands", 1, 1 );
+	std::cout << " save, s -- Saves the game. "
+			  << std::endl
+			  << " pause   -- pauses the game. "
+			  << std::endl
+			  << " resume  -- resumes the game. "
+			  << std::endl
+			  << " quit    -- quits the game. "
+			  << std::endl
+			  << " stats   -- displays the stats of the character. "
+			  << std::endl
+			  << " help    -- displays help "
+			  << std::endl << std::endl;
+}
 
-inline void PlaneDND::resume( void ){ this->live = true; }
+inline void PlaneDND::pause( void ){
+	 
+	this->live = false; 
+	print_message( "GAME PAUSED", 2, 2 );
+}
+
+inline void PlaneDND::resume( void ){
+	
+	 this->live = true;
+	 print_message( "GAME RESUMED", 2, 2 );
+}
+
+void PlaneDND::print_message( const std::string msg, 
+							  int before, 
+							  int after ) const {
+								 
+	 while( before-- ){ std::cout << std::endl; }
+	 std::cout << "** [" + msg + "] **" << std::endl;
+	 while( after-- ){ std::cout << std::endl; }
+}
 
 void PlaneDND::get_hero( void ){
 
@@ -55,16 +95,18 @@ inline void PlaneDND::print_stats( void ) const {
 	
 	std::cout 
 		<< std::endl
-	    << this->hero->get_name()
+	    << "  name: " << this->hero->get_name()
 		<< std::endl
-		<< this->hero->get_strength()
+		<< "  class: " << static_cast<Hero::HeroClass>( this->hero->hero_class_id )
 		<< std::endl
-		<< this->hero->get_dexterity()
+		<< "  strength: " << this->hero->get_strength()
 		<< std::endl
-		<< this->hero->get_vitality()
+		<< "  dexterity: " << this->hero->get_dexterity()
 		<< std::endl
-		<< this->hero->get_intelligence()
-		<< std::endl;
+		<< "  vitality: " << this->hero->get_vitality()
+		<< std::endl
+		<< "  intelligence: " << this->hero->get_intelligence()
+		<< std::endl << std::endl;
 }
 
 void PlaneDND::create_hero(){
@@ -79,12 +121,12 @@ void PlaneDND::create_hero(){
 	
 	std::cout << " ** Select a character. **" << std::endl;
 	std::cout << "    [1] Barbarian." << std::endl;
-	std::cout << "    [2] Sorceress." << std::endl;
+	std::cout << "    [2] Assassin." << std::endl;
 	std::cout << "    [3] Paladin." << std::endl;
-	std::cout << "    [4] Necromancer." << std::endl;
-	std::cout << "    [5] Amazon." << std::endl;
-	std::cout << "    [6] Druid." << std::endl;
-	std::cout << "    [7] Assassin." << std::endl;
+	std::cout << "    [4] Druid." << std::endl;
+	std::cout << "    [5] Necromancer." << std::endl;
+	std::cout << "    [6] Sorceress." << std::endl;
+	std::cout << "    [7] Amazon." << std::endl << std::endl;
 	
 	int choice;
 	
@@ -135,6 +177,7 @@ void PlaneDND::de_serialize( void ){
 	
 	// Get Hero Name
 	const std::string name = v[ 0 ];
+	print_message( "WELCOME BACK " + name, 0, 2 );
 	
 	// Get Hero Class
 	const Hero::HeroClass cl = static_cast<Hero::HeroClass>( atoi( v[ 1 ].c_str() ) );
@@ -146,6 +189,10 @@ void PlaneDND::de_serialize( void ){
 	const unsigned int intelligence = atoi( v[ 5 ].c_str() );
 	
 	this->hero = new Hero( name, atoi( v[ 1 ].c_str() ), cl );
+	this->hero->set_strength( strength );
+	this->hero->set_dexterity( dexterity );
+	this->hero->set_vitality( vitality );
+	this->hero->set_intelligence( intelligence );
 }
 
 inline void PlaneDND::save( void ){
@@ -166,9 +213,7 @@ inline void PlaneDND::save( void ){
 	   << std::endl
 	   << this->hero->get_intelligence();
 	   
-	std::cout << std::endl;   
-	std::cout << std::endl;
-	std::cout << " ** [GAME SAVED] **" << std::endl;
-	std::cout << std::endl;
-	std::cout << std::endl;
+
+	print_message( "GAME SAVED", 2, 2 );
+
 }

@@ -14,12 +14,6 @@ int main(){
 	
 	// Create game
 	PlaneDND planeDND;
-	
-	std::cout << std::endl 
-			  << " Press Enter to start. " 
-			  << std::endl;
-	std::cin.ignore(); // Wait for Enter key
-
 	planeDND.start(); // start game
 }
 

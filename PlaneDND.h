@@ -21,6 +21,10 @@ class PlaneDND {
 		inline void print_stats( void ) const;
 		inline void pause( void );
 		inline void resume( void );
+		void print_message( const std::string, 
+								int, 
+								int) const;
+		inline void print_help( void ) const;
 		PlaneDND();
 		~PlaneDND();
 };
