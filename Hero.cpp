@@ -1,8 +1,9 @@
 #include "Hero.h"
 
-Hero::Hero( const std::string name, 
+Hero::Hero( const std::string name,
+			const std::string desc,
 			const int id, 
-			HeroClass heroclass ) : Entity( name ), hero_class_id( id ){
+			HeroClass heroclass ) : Entity( name, desc ), hero_class_id( id ){
 	
 	this->level = 1;
 	this->strength = 5;

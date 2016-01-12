@@ -11,9 +11,6 @@ PlaneDND::~PlaneDND( void ){ delete hero; }
 
 void PlaneDND::start( void ){
 	
-	print_message( " Press Enter to start. ", 2, 2 );
-	std::cin.ignore(); // Wait for Enter key
-	
 	get_hero();
 	
 	loop(); // gameplay loop
@@ -54,7 +51,7 @@ inline void PlaneDND::print_help( void ) const {
 			  << std::endl
 			  << " resume  -- resumes the game. "
 			  << std::endl
-			  << " quit    -- quits the game. "
+			  << " quit, q -- quits the game. "
 			  << std::endl
 			  << " stats   -- displays the stats of the character. "
 			  << std::endl
@@ -78,9 +75,9 @@ void PlaneDND::print_message( const std::string msg,
 							  int before, 
 							  int after ) const {
 								 
-	 while( before-- ){ std::cout << std::endl; }
-	 std::cout << "** [" + msg + "] **" << std::endl;
-	 while( after-- ){ std::cout << std::endl; }
+	 while( before-->0 ){ std::cout << std::endl; }
+	 std::cout << " ** [" + msg + "] **" << std::endl;
+	 while( after-->0 ){ std::cout << std::endl; }
 }
 
 void PlaneDND::get_hero( void ){
@@ -115,7 +112,11 @@ void PlaneDND::create_hero(){
 		
 	std::cout << " ** Enter a hero name: ";
 	std::string name;
-	std::cin >> name;
+	std::getline( std::cin, name );
+	
+	std::cout << " ** Enter a hero description: ";
+	std::string desc;
+	std::getline( std::cin, desc );
 	
 	std::cout << std::endl;
 	
@@ -155,7 +156,7 @@ void PlaneDND::create_hero(){
 	else if( choice == 7 )
 		heroClass = Hero::ASSASSIN;
 		
-	this->hero = new Hero( name, choice, heroClass ); // construct the hero
+	this->hero = new Hero( name, desc, choice, heroClass ); // construct the hero
 }
 
 void PlaneDND::de_serialize( void ){
@@ -168,27 +169,38 @@ void PlaneDND::de_serialize( void ){
 	std::string temp;
 	while( std::getline( infile, line ) ){
 		
-		std::istringstream iss( line );
+		//std::istringstream iss( line );
 		
-		if( !( iss >> temp ) ) break;
+		//if( !( iss >> temp ) ) break;
 		
-		v.push_back( temp );
+		//if( !( std::getline( infile, line ) ) ) break;
+		
+		v.push_back( line );
+	}
+	
+	if( v.empty() ){
+		 create_hero();
+		 return;
 	}
 	
 	// Get Hero Name
 	const std::string name = v[ 0 ];
-	print_message( "WELCOME BACK " + name, 0, 2 );
+	print_message( "WELCOME BACK " + name, 1, 2 );
+	
+	// Hero Description
+	const std::string desc = v[ 1 ];
+	print_message( desc, 0, 2 );
 	
 	// Get Hero Class
-	const Hero::HeroClass cl = static_cast<Hero::HeroClass>( atoi( v[ 1 ].c_str() ) );
+	const Hero::HeroClass cl = static_cast<Hero::HeroClass>( atoi( v[ 2 ].c_str() ) );
 	
 	// Load stats
-	const unsigned int strength = atoi( v[ 2 ].c_str() );
-	const unsigned int dexterity = atoi( v[ 3 ].c_str() );
-	const unsigned int vitality = atoi( v[ 4 ].c_str() );
-	const unsigned int intelligence = atoi( v[ 5 ].c_str() );
+	const unsigned int strength = atoi( v[ 3 ].c_str() );
+	const unsigned int dexterity = atoi( v[ 4 ].c_str() );
+	const unsigned int vitality = atoi( v[ 5 ].c_str() );
+	const unsigned int intelligence = atoi( v[ 6 ].c_str() );
 	
-	this->hero = new Hero( name, atoi( v[ 1 ].c_str() ), cl );
+	this->hero = new Hero( name, desc, atoi( v[ 1 ].c_str() ), cl );
 	this->hero->set_strength( strength );
 	this->hero->set_dexterity( dexterity );
 	this->hero->set_vitality( vitality );
@@ -203,6 +215,8 @@ inline void PlaneDND::save( void ){
 	
 	of << this->hero->get_name()
 	   << std::endl
+	   << this->hero->get_description()
+	   << std::endl
 	   << this->hero->hero_class_id
 	   << std::endl
 	   << this->hero->get_strength()
@@ -212,8 +226,6 @@ inline void PlaneDND::save( void ){
 	   << this->hero->get_vitality()
 	   << std::endl
 	   << this->hero->get_intelligence();
-	   
 
 	print_message( "GAME SAVED", 2, 2 );
-
 }

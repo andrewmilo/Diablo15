@@ -6,7 +6,11 @@
 class Entity {
 	
 	protected:
+		Entity( const std::string,
+				const std::string );
+	
 		std::string name;
+		std::string description;
 		unsigned int level;
 		int strength;
 		int dexterity;
@@ -17,10 +21,10 @@ class Entity {
 		int orientation;
 		
 	public:
-		Entity( std::string );
-		~Entity( void );
+		virtual ~Entity( void );
 	
 		std::string get_name( void ) const;
+		std::string get_description( void ) const;
 		unsigned int get_level( void ) const;
 		int get_strength( void ) const;
 		int get_dexterity( void ) const;

@@ -19,7 +19,11 @@ class Hero : public Entity {
 		};
 		
 		HeroClass get_hero_class( void ) const;
-		Hero( const std::string, const int, const HeroClass );
+		
+		Hero( const std::string, 
+			  const std::string, 
+			  const int, 
+			  const HeroClass );
 		~Hero( void );
 	private:
 	

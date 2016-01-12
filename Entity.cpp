@@ -1,13 +1,16 @@
 #include "Entity.h"
 
-Entity::Entity( std::string name ){ 
+Entity::Entity( const std::string name, 
+				const std::string desc ){ 
 	
 	this->name = name;
+	this->description = desc;
 }
 
 Entity::~Entity( void ){ }
 
 std::string Entity::get_name( void ) const { return this->name; }
+std::string Entity::get_description( void ) const { return this->description; }
 unsigned int Entity::get_level( void ) const { return this->level; }
 int Entity::get_strength( void ) const { return this->strength; }
 int Entity::get_dexterity( void ) const { return this->dexterity; }
