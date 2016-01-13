@@ -25,18 +25,19 @@ void PlaneDND::loop( void ){
 		std::cout << "> ";
 		std::cin >> c;
 		
-		if( this->live ){
-			
-			// gameplay physics/mechanics
-			
-		}
-		
 		if( c == "save" || c == "s" ) { save(); }
 		else if( c == "pause" ) pause();
 		else if( c == "resume" ) resume();
 		else if( c == "quit" || c == "q" ) { break; }
 		else if( c == "stats" ){ print_stats(); }
 		else if( c == "help" ){ print_help(); }
+		else if( this->live ){
+			
+			// gameplay physics/mechanics
+			
+			
+			print_message( "Press Enter for next turn.", 1, 1 );
+		}
 	}
 }
 
