@@ -35,6 +35,11 @@ void PlaneDND::loop( void ){
 			
 			// gameplay physics/mechanics
 			
+			const unsigned int level = this->hero->get_level();
+			
+			const int level_range = 2;
+			
+			//if(  )
 			
 			print_message( "Press Enter for next turn.", 1, 1 );
 		}
