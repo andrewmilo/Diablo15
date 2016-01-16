@@ -42,6 +42,7 @@ void PlaneDND::loop( void ){
 			//if(  )
 			
 			print_message( "Press Enter for next turn.", 1, 1 );
+			this->set_turn( this->get_turn() + 1 ); // next turn
 		}
 	}
 }

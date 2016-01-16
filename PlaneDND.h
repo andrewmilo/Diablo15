@@ -9,12 +9,15 @@ class PlaneDND {
 		Hero* hero;
 		const char* SAVE_PATH;
 		volatile bool live;
+		unsigned int turn; // turn number
 	
 	public:
 		void start( void );
 		void get_hero( void );
 		void de_serialize( void );
 		void create_hero( void );
+		unsigned int get_turn( void ) const;
+		void set_turn( unsigned int );
 		inline void save( void );
 		void loop( void );
 		inline void toggle_game_state( void );
