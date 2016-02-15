@@ -3,7 +3,10 @@
 
 class Enemy : public Entity {
 	
-	public: 
+	public:
+		Enemy( void );
+		Enemy( Entity& enemy, int variance );
+		~Enemy( void );
 	
 	private:
 	

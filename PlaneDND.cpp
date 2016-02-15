@@ -5,9 +5,20 @@
 #include <cstdlib>
 #include <sstream>
 
-PlaneDND::PlaneDND( void ) : SAVE_PATH( "save.txt" ){ }
+PlaneDND::PlaneDND( void ) : SAVE_PATH( "save.txt" ){ welcome(); }
 
 PlaneDND::~PlaneDND( void ){ delete hero; }
+
+void PlaneDND::welcome( void ){
+	
+	std::cout << std::endl
+			  << " **                                    **"
+			  << std::endl
+			  << " ** Welcome to Diablo 1.5. blizzardtm. **" 
+			  << std::endl
+			  << " **                                    **"
+			  << std::endl;
+}
 
 void PlaneDND::start( void ){
 	
@@ -38,6 +49,8 @@ void PlaneDND::loop( void ){
 			const unsigned int level = this->hero->get_level();
 			
 			const int level_range = 2;
+			
+			
 			
 			//if(  )
 			
@@ -236,3 +249,6 @@ inline void PlaneDND::save( void ){
 
 	print_message( "GAME SAVED", 2, 2 );
 }
+
+unsigned int PlaneDND::get_turn( void ) const { return this->turn; }
+void PlaneDND::set_turn( unsigned int i ){ this->turn=i; }

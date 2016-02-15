@@ -12,6 +12,7 @@ class PlaneDND {
 		unsigned int turn; // turn number
 	
 	public:
+		void welcome( void );
 		void start( void );
 		void get_hero( void );
 		void de_serialize( void );
