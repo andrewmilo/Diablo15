@@ -14,7 +14,7 @@ void PlaneDND::welcome( void ){
 	std::cout << std::endl
 			  << " **                                    **"
 			  << std::endl
-			  << " ** Welcome to Diablo 1.5. blizzardtm. **" 
+			  << " ** Welcome to Diablo 1.5. blizzardtm, lmao. **" 
 			  << std::endl
 			  << " **                                    **"
 			  << std::endl;
@@ -188,13 +188,7 @@ void PlaneDND::de_serialize( void ){
 	std::string line;
 	std::string temp;
 	while( std::getline( infile, line ) ){
-		
-		//std::istringstream iss( line );
-		
-		//if( !( iss >> temp ) ) break;
-		
-		//if( !( std::getline( infile, line ) ) ) break;
-		
+
 		v.push_back( line );
 	}
 	
