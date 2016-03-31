@@ -5,7 +5,6 @@ class Quality {
 
 public:
     enum {
-        
 		White,
 		Gray,
 		Blue,
