@@ -9,7 +9,7 @@ PlaneDND::PlaneDND( void ) : SAVE_PATH( "save.txt" ){ welcome(); }
 
 PlaneDND::~PlaneDND( void ){ delete hero; }
 
-void PlaneDND::welcome( void ){
+void PlaneDND::welcome( void ) const {
 	
 	std::cout << std::endl
 			  << " **                                    **"

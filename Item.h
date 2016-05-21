@@ -8,16 +8,23 @@
 class Item {
 
 public:
-    Item( std::string name, Quality quality, Type type );
+
+    Item( std::string, Quality, Type, bool );
+    
     std::string get_name( void ) const;
-    void set_name( std::string name );
     Quality get_quality( void  ) const;
-    void set_quality( Quality quality );
     Type get_type( void ) const;
+    float get_durability( void ) const;
+    
+    void set_name( std::string name );
+    void set_quality( Quality quality );
     void set_type( Type type );
+    void set_durability( float );
     
 private:
     std::string name;
+    float durability;
+    bool soulbound;
     Quality quality;
     Type type;
 };
