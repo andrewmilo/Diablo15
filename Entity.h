@@ -12,7 +12,8 @@ class Entity {
 		std::string name;
 		std::string description;
 		unsigned int level;
-		int strength;
+		float health;
+        int strength;
 		int dexterity;
 		int vitality;
 		int intelligence;
@@ -42,6 +43,7 @@ class Entity {
 		void set_positionY( const int );
 		void set_orientation( const int );
 		
+        float damage( void ) const;
 		void attack( Entity& ) const;
 		void move( const int steps, const char direction );
 };

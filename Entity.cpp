@@ -4,6 +4,7 @@ Entity::Entity( const std::string name,
 				const std::string desc ){ 
 	
 	this->name = name;
+    this->health = 100.0f;
 	this->description = desc;
 }
 
@@ -28,9 +29,17 @@ void Entity::set_positionX( const int positionX ) { this->positionX = positionX;
 void Entity::set_positionY( const int positionY ) { this->positionY = positionY; }
 void Entity::set_orientation( const int orientation ) { this->orientation = orientation; }
 
+float Entity::damage( void ) const {
+    
+    return this->dexterity 
+         + this->strength
+         + this->intelligence
+         + this->vitality;
+}
+
 void Entity::attack( Entity& other ) const {
 	
-	//other.health -= this->strength;
+	other.health -= this->damage();
 }
 
 void Entity::move( const int steps, const char direction ){
