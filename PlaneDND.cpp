@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdlib>
 #include <sstream>
+#include <stdlib.h>
+#include <time.h> 
 
 PlaneDND::PlaneDND( void ) : SAVE_PATH( "save.txt" ){ welcome(); }
 
@@ -21,10 +23,25 @@ void PlaneDND::welcome( void ) const {
 }
 
 void PlaneDND::start( void ){
-	
+
+	srand (time(NULL));
+
 	get_hero();
-	
+	choose_difficulty();
+
 	loop(); // gameplay loop
+}
+
+void PlaneDND::choose_difficulty( void ){
+
+	print_message( "Select a difficulty from 1-100", 2, 2 );
+
+	int d; cin >> d;
+
+	if( d > 0 && d < 101 ){
+
+		set_difficulty( d );
+	}
 }
 
 void PlaneDND::loop( void ){
@@ -36,27 +53,37 @@ void PlaneDND::loop( void ){
 		std::cout << "> ";
 		std::cin >> c;
 		
-		if( c == "save" || c == "s" ) { save(); }
+		if( c == "save" || c == "s" ) save();
 		else if( c == "pause" ) pause();
 		else if( c == "resume" ) resume();
-		else if( c == "quit" || c == "q" ) { break; }
-		else if( c == "stats" ){ print_stats(); }
-		else if( c == "help" ){ print_help(); }
-		else if( this->live ){
-			
-			// gameplay physics/mechanics
+		else if( c == "quit" || c == "q" ) break;
+		else if( c == "stats" ) print_stats();
+		else if( c == "help" ) print_help();
+		else if( this->live ){ // gameplay physics/mechanics
 			
 			const unsigned int level = this->hero->get_level();
 			
 			const int level_range = 2;
-			
-			
-			
-			//if(  )
+
+			// round event
+			round_event();
 			
 			print_message( "Press Enter for next turn.", 1, 1 );
 			this->set_turn( this->get_turn() + 1 ); // next turn
 		}
+	}
+}
+
+void PlaneDND::round_event( void ){
+
+	int random_number = rand() % 3 + 1;
+
+	if( random_number == 1 ){ // Spawn a mob?
+		print_message( "mob spawn" );
+	} else if( random_number == 2 ){ // Empty round
+		print_message( "empty round" );
+	} else { // Find random item
+		print_message( "random item" );
 	}
 }
 
@@ -92,8 +119,8 @@ inline void PlaneDND::resume( void ){
 }
 
 void PlaneDND::print_message( const std::string msg, 
-							  int before, 
-							  int after ) const {
+							  int before=0, 
+							  int after=0 ) const {
 								 
 	 while( before-->0 ){ std::cout << std::endl; }
 	 std::cout << " ** [" + msg + "] **" << std::endl;

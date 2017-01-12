@@ -10,6 +10,7 @@ class PlaneDND {
 		const char* SAVE_PATH;
 		volatile bool live;
 		unsigned int turn; // turn number
+		int difficulty;
 	
 	public:
 		void welcome( void ) const;
@@ -17,6 +18,10 @@ class PlaneDND {
 		void get_hero( void );
 		void de_serialize( void );
 		void create_hero( void );
+		void choose_difficulty( void );
+		void set_difficulty( int );
+		void round_event( void );
+		int get_difficulty( void );
 		unsigned int get_turn( void ) const;
 		void set_turn( unsigned int );
 		inline void save( void );
